@@ -6,6 +6,8 @@
     "tarjs": "src/index.js"
   },
   "scripts": {
+    "lint": "eslint src",
+    "prettify": "prettier --write src/**/*js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,5 +34,20 @@
     "filesize": "^3.6.1",
     "ora": "^3.0.0",
     "tar": "^4.4.6"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0",
+    "eslint-plugin-prettier": "^3.0.0",
+    "husky": "^1.1.2",
+    "lint-staged": "^8.0.4",
+    "prettier": "^1.14.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": ["prettier --write", "git add"]
   }
 }

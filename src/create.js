@@ -26,12 +26,15 @@ exports.create = async function(program) {
   const start = Date.now();
 
   try {
-    await create({
-      file: program.file,
-      cwd: program.change,
-      portable: program.portable,
-      filter: program.verbose ? logEntry : (path, stat) => true
-    }, program.args);
+    await create(
+      {
+        file: program.file,
+        cwd: program.change,
+        portable: program.portable,
+        filter: program.verbose ? logEntry : () => true
+      },
+      program.args
+    );
   } catch (err) {
     spinner.stop();
     process.stderr.write(`An unexpected error occured while writing ${program.file}:\n`);

@@ -28,6 +28,8 @@
   "dependencies": {
     "commander": "^2.19.0",
     "debug": "^4.1.0",
+    "filesize": "^3.6.1",
+    "ora": "^3.0.0",
     "tar": "^4.4.6"
   }
 }

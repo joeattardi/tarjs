@@ -9,7 +9,8 @@ program
   .version(version)
   .arguments('[files]')
   .option('-c, --create', 'Create a tar archive')
-  .option('--portable')
+  .option('-v, --verbose', 'Show verbose output')
+  .option('--portable', 'Omit system-specific metadata from the output file')
   .option('-f, --file [file]', 'Output filename')
   .option('-C, --change [dir]', 'Change into directory before archiving')
   .parse(process.argv);

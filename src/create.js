@@ -1,3 +1,4 @@
+const { bold } = require('chalk');
 const debug = require('debug')('tarjs:create');
 const filesize = require('filesize');
 const ora = require('ora');
@@ -19,6 +20,7 @@ exports.create = async function(program) {
 
   if (!program.verbose) {
     spinner.start();
+    spinner.text = `Creating archive: ${bold(program.file)}`;
   }
 
   const start = Date.now();
@@ -39,11 +41,11 @@ exports.create = async function(program) {
 
   const end = Date.now();
   spinner.stop();
-  process.stdout.write(`Wrote ${program.file} in ${(end - start) / 1000} sec.\n`);
+  process.stdout.write(`Wrote ${bold(program.file)} in ${(end - start) / 1000} sec.\n`);
 };
 
 function logEntry(path, stat) {
-  process.stdout.write(`adding ${path} (${filesize(stat.size)})\n`);
+  process.stdout.write(`adding ${bold(path)} (${filesize(stat.size)})\n`);
   return true;
 }
 

@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/joeattardi/tarjs#readme",
   "dependencies": {
+    "chalk": "^2.4.1",
     "commander": "^2.19.0",
     "debug": "^4.1.0",
     "filesize": "^3.6.1",

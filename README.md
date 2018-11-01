@@ -3,7 +3,7 @@ Command-line tar utility
 
 # Installation
 
-    npm install -g tarjs
+    npm install -g tarjs-cli
 
 # Usage
 

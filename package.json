@@ -1,6 +1,6 @@
 {
-  "name": "tarjs",
-  "version": "0.1.0",
+  "name": "tarjs-cli",
+  "version": "0.2.0",
   "description": "Command-line tar utility",
   "bin": {
     "tarjs": "src/index.js"
@@ -25,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/joeattardi/tarjs/issues"
   },
-  "homepage": "https://npmjs.com/package/tarjs",
+  "homepage": "https://npmjs.com/package/tarjs-cli",
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",

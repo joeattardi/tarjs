@@ -1,4 +1,7 @@
 # tarjs
+
+[![npm version](https://badge.fury.io/js/tarjs-cli.svg)](https://badge.fury.io/js/tarjs-cli)
+
 Command-line tar utility
 
 # Installation

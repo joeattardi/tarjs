@@ -1,4 +1,4 @@
-const { statSync } = require('fs');
+const { existsSync, statSync } = require('fs');
 
 const { bold } = require('chalk');
 const debug = require('debug')('tarjs:create');
@@ -78,5 +78,17 @@ function validateOptions(program) {
     return false;
   }
 
+  const missingFiles = getMissingFiles(program.args);
+  if (missingFiles.length) {
+    missingFiles.forEach(file => {
+      process.stderr.write(`${bold(file)}: No such file or directory\n`);
+    });
+    return false;
+  }
+
   return true;
+}
+
+function getMissingFiles(files) {
+  return files.filter(file => !existsSync(file));
 }

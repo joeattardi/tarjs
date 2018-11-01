@@ -1,6 +1,6 @@
 {
   "name": "tarjs",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Command-line tar utility",
   "bin": {
     "tarjs": "src/index.js"

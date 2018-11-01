@@ -20,30 +20,34 @@ Creates a new tar archive. When this option is specified, the following options 
  - The output file name (`-f`)
  - One or more input files or directories, specified after the options
 
- ## `-t, --list`
+## `-t, --list`
 
- Lists the contents of a tar archive. When this option is specified, the input file name (`-f`) is required.
+Lists the contents of a tar archive. When this option is specified, the input file name (`-f`) is required.
 
- ## `-v, --verbose`
+## `-v, --verbose`
 
- Shows additional output.
+Shows additional output.
 
- ## `-q, --quiet`
+## `-q, --quiet`
 
- Shows minimal output. This is useful for using `tarjs` in scripts.
+Shows minimal output. This is useful for using `tarjs` in scripts.
 
- ## `--portable`
+## `--portable`
 
- Creates a tar archive without system-specific metadata. This allows you to create a tar file with the same checksum on different computers.
+Creates a tar archive without system-specific metadata. This allows you to create a tar file with the same checksum on different computers. This will omit all system-specific metadata *except* modification time. If you want to omit the modification time of all entries as well, specify the `--no-mtime` option.
 
- ## `-f, --file`
+## `--no-mtime`
 
- The file to operate on.
+Creates a tar archive without modification times on the entries. Usually used in conjunction with `--portable` to generate deterministic archives.
+
+## `-f, --file`
+
+The file to operate on.
  
- When creating (`-c`), this is the name of the output file. It will be overwritten if it already exists.
+When creating (`-c`), this is the name of the output file. It will be overwritten if it already exists.
 
- When listing (`-t`), this is the name of the input file.
+When listing (`-t`), this is the name of the input file.
 
- ## `-C, --change`
+## `-C, --change`
 
- The directory to change into before adding the files to the tar archive. This can also be thought of as the base directory for the specified files and directories.
+The directory to change into before adding the files to the tar archive. This can also be thought of as the base directory for the specified files and directories.

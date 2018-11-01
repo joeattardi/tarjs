@@ -37,7 +37,7 @@ exports.create = async function(program) {
     );
   } catch (err) {
     spinner.stop();
-    process.stderr.write(`An unexpected error occured while writing ${program.file}:\n`);
+    process.stderr.write(`An unexpected error occured while writing ${bold(program.file)}:\n`);
     process.stderr.write(`    ${err.message}\n`);
     process.exit(1);
   }
@@ -53,7 +53,7 @@ function logEntry(path, stat) {
 }
 
 function validateOptions(program) {
-  if (!program.file) {
+  if (!program.file || typeof program.file !== 'string') {
     process.stderr.write('No output filename specified\n');
     return false;
   }

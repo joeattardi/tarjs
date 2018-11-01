@@ -33,7 +33,8 @@ exports.create = async function(program) {
         file: program.file,
         cwd: program.change,
         portable: program.portable,
-        filter: program.verbose ? logEntry : () => true
+        noMtime: !program.mtime,
+        filter: (path, stat) => filter(path, stat, program)
       },
       program.args
     );
@@ -52,6 +53,14 @@ exports.create = async function(program) {
     process.stdout.write(`Wrote ${bold(program.file)} (${filesize(stats.size)}) in ${(end - start) / 1000} sec.\n`);
   }
 };
+
+function filter(path, stat, program) {
+  if (program.verbose) {
+    logEntry(path, stat);
+  }
+
+  return true;
+}
 
 function logEntry(path, stat) {
   process.stdout.write(`adding ${bold(path)} (${filesize(stat.size)})\n`);

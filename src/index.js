@@ -14,7 +14,8 @@ program
   .option('-t, --list', 'List tar contents')
   .option('-v, --verbose', 'Show verbose output')
   .option('-q, --quiet', 'Show minimal output')
-  .option('--portable', 'Omit system-specific metadata from the output file')
+  .option('--no-mtime', 'Omit the modification time of all added entries')
+  .option('--portable', 'Omit system-specific metadata from the output file (except modification time)')
   .option('-f, --file [file]', 'Name of the tar file to operate on')
   .option('-C, --change [dir]', 'Change into directory before archiving')
   .parse(process.argv);

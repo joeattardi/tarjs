@@ -7,8 +7,7 @@
   },
   "scripts": {
     "lint": "eslint src",
-    "prettify": "prettier --write src/**/*js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prettify": "prettier --write src/**/*js"
   },
   "repository": {
     "type": "git",
@@ -26,7 +25,7 @@
   "bugs": {
     "url": "https://github.com/joeattardi/tarjs/issues"
   },
-  "homepage": "https://github.com/joeattardi/tarjs#readme",
+  "homepage": "https://npmjs.com/package/tarjs",
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",

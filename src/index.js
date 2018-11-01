@@ -9,6 +9,7 @@ const version = require('../package.json').version;
 program
   .version(version)
   .arguments('[files]')
+  .description('Command-line utility for working with tar files.')
   .option('-c, --create', 'Create a tar archive')
   .option('-t, --list', 'List tar contents')
   .option('-v, --verbose', 'Show verbose output')
@@ -29,8 +30,13 @@ if (program.create) {
 }
 
 function checkCombinations() {
+  if (!program.list && !program.create) {
+    process.stderr.write('Must specify one of -c, -t\n');
+    return false;
+  }
+
   if (program.list && program.create) {
-    process.stdout.write("Can't specify both -c and -t options\n");
+    process.stderr.write("Can't specify both -c and -t options\n");
     return false;
   }
 

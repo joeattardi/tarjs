@@ -15,7 +15,7 @@ program
   .option('-v, --verbose', 'Show verbose output')
   .option('-q, --quiet', 'Show minimal output')
   .option('--portable', 'Omit system-specific metadata from the output file')
-  .option('-f, --file [file]', 'Output filename')
+  .option('-f, --file [file]', 'Name of the tar file to operate on')
   .option('-C, --change [dir]', 'Change into directory before archiving')
   .parse(process.argv);
 

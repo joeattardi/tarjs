@@ -13,7 +13,7 @@ exports.list = async function(program) {
   try {
     await list({
       file: program.file,
-      onentry: printEntry
+      onentry: entry => printEntry(entry, program)
     });
   } catch (err) {
     process.stderr.write(`An unexpected error occurred while writing ${bold(program.file)}:\n`);
@@ -30,6 +30,10 @@ function validateOptions(program) {
   return true;
 }
 
-function printEntry(entry) {
-  process.stdout.write(`${bold(entry.path)} (${filesize(entry.size)})\n`);
+function printEntry(entry, program) {
+  if (program.quiet) {
+    process.stdout.write(`${entry.path}\n`);
+  } else {
+    process.stdout.write(`${bold(entry.path)} (${filesize(entry.size)})\n`);
+  }
 }

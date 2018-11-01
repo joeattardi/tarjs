@@ -1,3 +1,5 @@
+const { statSync } = require('fs');
+
 const { bold } = require('chalk');
 const debug = require('debug')('tarjs:create');
 const filesize = require('filesize');
@@ -18,7 +20,7 @@ exports.create = async function(program) {
     debug('Creating portable tar, not including system-specific metadata');
   }
 
-  if (!program.verbose) {
+  if (!program.verbose && !program.quiet) {
     spinner.start();
     spinner.text = `Creating archive: ${bold(program.file)}`;
   }
@@ -44,7 +46,11 @@ exports.create = async function(program) {
 
   const end = Date.now();
   spinner.stop();
-  process.stdout.write(`Wrote ${bold(program.file)} in ${(end - start) / 1000} sec.\n`);
+
+  if (!program.quiet) {
+    const stats = statSync(program.file);
+    process.stdout.write(`Wrote ${bold(program.file)} (${filesize(stats.size)}) in ${(end - start) / 1000} sec.\n`);
+  }
 };
 
 function logEntry(path, stat) {

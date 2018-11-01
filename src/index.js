@@ -12,6 +12,7 @@ program
   .option('-c, --create', 'Create a tar archive')
   .option('-t, --list', 'List tar contents')
   .option('-v, --verbose', 'Show verbose output')
+  .option('-q, --quiet', 'Show minimal output')
   .option('--portable', 'Omit system-specific metadata from the output file')
   .option('-f, --file [file]', 'Output filename')
   .option('-C, --change [dir]', 'Change into directory before archiving')

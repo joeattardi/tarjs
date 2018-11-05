@@ -2,8 +2,7 @@
 
 const program = require('commander');
 
-const { create } = require('./create');
-const { list } = require('./list');
+const modes = require('./modes');
 const version = require('../package.json').version;
 
 program
@@ -12,34 +11,33 @@ program
   .description('Command-line utility for working with tar files.')
   .option('-c, --create', 'Create a tar archive')
   .option('-t, --list', 'List tar contents')
+  .option('-x, --extract', 'Extract tar file')
+  .option('-f, --file [file]', 'Name of the tar file to operate on')
   .option('-v, --verbose', 'Show verbose output')
   .option('-q, --quiet', 'Show minimal output')
   .option('--no-mtime', 'Omit the modification time of all added entries')
   .option('--portable', 'Omit system-specific metadata from the output file (except modification time)')
-  .option('-f, --file [file]', 'Name of the tar file to operate on')
   .option('-C, --change [dir]', 'Change into directory before archiving')
   .parse(process.argv);
 
-if (!checkCombinations()) {
-  process.exit(1);
+main();
+
+async function main() {
+  const exitCode = await checkAndRunMode();
+  process.exit(exitCode);
 }
 
-if (program.create) {
-  create(program);
-} else if (program.list) {
-  list(program);
-}
-
-function checkCombinations() {
-  if (!program.list && !program.create) {
-    process.stderr.write('Must specify one of -c, -t\n');
-    return false;
+async function checkAndRunMode() {
+  const selectedModes = Object.keys(modes).filter(mode => program[mode]);
+  switch (selectedModes.length) {
+    case 0:
+      process.stderr.write('Must specify one of -c, -t, -x\n');
+      return 1;
+    case 1:
+      await modes[selectedModes[0]](program);
+      return 0;
+    default:
+      process.stderr.write('Cannot specify multiple operations\n');
+      return 1;
   }
-
-  if (program.list && program.create) {
-    process.stderr.write("Can't specify both -c and -t options\n");
-    return false;
-  }
-
-  return true;
 }

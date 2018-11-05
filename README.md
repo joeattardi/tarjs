@@ -39,6 +39,10 @@ Shows additional output.
 
 Shows minimal output. This is useful for using `tarjs` in scripts.
 
+## `--exclude [pattern]`
+
+Excludes files and directories that match the given pattern from the tar archive.
+
 ## `--portable`
 
 Creates a tar archive without system-specific metadata. This allows you to create a tar file with the same checksum on different computers. This will omit all system-specific metadata *except* modification time. If you want to omit the modification time of all entries as well, specify the `--no-mtime` option.
@@ -47,7 +51,7 @@ Creates a tar archive without system-specific metadata. This allows you to creat
 
 Creates a tar archive without modification times on the entries. Usually used in conjunction with `--portable` to generate deterministic archives.
 
-## `-f, --file`
+## `-f, --file [filename]`
 
 The file to operate on.
  
@@ -55,7 +59,7 @@ When creating (`-c`), this is the name of the output file. It will be overwritte
 
 When listing (`-t`), this is the name of the input file.
 
-## `-C, --change`
+## `-C, --change [directory]`
 
 When creating (`-c`), this is the directory to change into before adding the files to the tar archive. This can also be thought of as the base directory for the specified files and directories.
 

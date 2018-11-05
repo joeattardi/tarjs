@@ -1,4 +1,5 @@
 const { existsSync, statSync } = require('fs');
+const { resolve } = require('path');
 
 const { bold } = require('chalk');
 const debug = require('debug')('tarjs:create');
@@ -15,6 +16,14 @@ exports.create = async function(program) {
 
   debug(`Creating tar archive ${program.file}`);
   debug(`Including files: ${JSON.stringify(program.args)}`);
+
+  let filterRegexp;
+  try {
+    filterRegexp = new RegExp(program.exclude);
+  } catch (err) {
+    process.stderr.write(`Invalid pattern specified for --exclude: ${bold(program.exclude)}\n`);
+    return 1;
+  }
 
   if (program.portable) {
     debug('Creating portable tar, not including system-specific metadata');
@@ -34,7 +43,7 @@ exports.create = async function(program) {
         cwd: program.change,
         portable: program.portable,
         noMtime: !program.mtime,
-        filter: (path, stat) => filter(path, stat, program)
+        filter: (path, stat) => filter(path, stat, program, filterRegexp)
       },
       program.args
     );
@@ -54,12 +63,24 @@ exports.create = async function(program) {
   }
 };
 
-function filter(path, stat, program) {
-  if (program.verbose) {
-    logEntry(path, stat);
+function filter(path, stat, program, filterRegexp) {
+  if (resolve(path) === resolve(program.file)) {
+    if (!program.quiet) {
+      process.stderr.write(`${bold(path)}: Can't add archive to itself\n`);
+    }
+
+    return false;
   }
 
-  return true;
+  if (filterRegexp && !filterRegexp.test(path)) {
+    if (program.verbose) {
+      logEntry(path, stat);
+    }
+
+    return true;
+  } else {
+    return false;
+  }
 }
 
 function logEntry(path, stat) {

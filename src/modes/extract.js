@@ -55,7 +55,7 @@ function validateOptions(program) {
 
 function printEntry(entry, program) {
   if (program.verbose) {
-    process.stdout.write(`Extracting ${bold(entry.path)} (${filesize(entry.size)})\n`);
+    process.stdout.write(`extracting ${bold(entry.path)} (${filesize(entry.size)})\n`);
   }
 }
 

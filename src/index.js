@@ -15,6 +15,7 @@ program
   .option('-f, --file [file]', 'Name of the tar file to operate on')
   .option('-v, --verbose', 'Show verbose output')
   .option('-q, --quiet', 'Show minimal output')
+  .option('--exclude [pattern]', 'Exclude files or directories that match the given pattern')
   .option('--no-mtime', 'Omit the modification time of all added entries')
   .option('--portable', 'Omit system-specific metadata from the output file (except modification time)')
   .option('-C, --change [dir]', 'Change into directory before archiving or extracting')

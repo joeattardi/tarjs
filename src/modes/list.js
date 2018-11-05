@@ -3,9 +3,11 @@ const debug = require('debug')('tarjs:list');
 const filesize = require('filesize');
 const { list } = require('tar');
 
+const { checkReadFile } = require('../utils');
+
 exports.list = async function(program) {
   if (!validateOptions(program)) {
-    process.exit(1);
+    return 1;
   }
 
   debug(`Listing contents of tar archive: ${program.file}`);
@@ -27,7 +29,7 @@ function validateOptions(program) {
     return false;
   }
 
-  return true;
+  return checkReadFile(program.file);
 }
 
 function printEntry(entry, program) {

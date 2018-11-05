@@ -17,7 +17,7 @@ program
   .option('-q, --quiet', 'Show minimal output')
   .option('--no-mtime', 'Omit the modification time of all added entries')
   .option('--portable', 'Omit system-specific metadata from the output file (except modification time)')
-  .option('-C, --change [dir]', 'Change into directory before archiving')
+  .option('-C, --change [dir]', 'Change into directory before archiving or extracting')
   .parse(process.argv);
 
 main();
@@ -34,8 +34,7 @@ async function checkAndRunMode() {
       process.stderr.write('Must specify one of -c, -t, -x\n');
       return 1;
     case 1:
-      await modes[selectedModes[0]](program);
-      return 0;
+      return await modes[selectedModes[0]](program);
     default:
       process.stderr.write('Cannot specify multiple operations\n');
       return 1;

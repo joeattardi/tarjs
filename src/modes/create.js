@@ -10,7 +10,7 @@ const spinner = ora();
 
 exports.create = async function(program) {
   if (!validateOptions(program)) {
-    process.exit(1);
+    return 1;
   }
 
   debug(`Creating tar archive ${program.file}`);
@@ -42,7 +42,7 @@ exports.create = async function(program) {
     spinner.stop();
     process.stderr.write(`An unexpected error occured while writing ${bold(program.file)}:\n`);
     process.stderr.write(`    ${err.message}\n`);
-    process.exit(1);
+    return 1;
   }
 
   const end = Date.now();

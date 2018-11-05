@@ -27,6 +27,10 @@ Creates a new tar archive. When this option is specified, the following options 
 
 Lists the contents of a tar archive. When this option is specified, the input file name (`-f`) is required.
 
+## `-x, --extract`
+
+Extracts the contents of a tar archive. When this option is specified, the input file name (`-f`) is required.
+
 ## `-v, --verbose`
 
 Shows additional output.
@@ -53,4 +57,6 @@ When listing (`-t`), this is the name of the input file.
 
 ## `-C, --change`
 
-The directory to change into before adding the files to the tar archive. This can also be thought of as the base directory for the specified files and directories.
+When creating (`-c`), this is the directory to change into before adding the files to the tar archive. This can also be thought of as the base directory for the specified files and directories.
+
+When extracting (`-x`), this is the directory to change into before extracing files from the tar archive. Note that this directory must exist before invoking `tarjs`.

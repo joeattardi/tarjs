@@ -19,7 +19,7 @@ exports.create = async function(program) {
 
   let filterRegexp;
   try {
-    filterRegexp = new RegExp(program.exclude);
+    filterRegexp = program.exclude && new RegExp(program.exclude);
   } catch (err) {
     process.stderr.write(`Invalid pattern specified for --exclude: ${bold(program.exclude)}\n`);
     return 1;
@@ -72,15 +72,17 @@ function filter(path, stat, program, filterRegexp) {
     return false;
   }
 
-  if (filterRegexp && !filterRegexp.test(path)) {
-    if (program.verbose) {
+  if (filterRegexp) {
+    if (!filterRegexp.test(path)) {
       logEntry(path, stat);
+      return true;
     }
 
-    return true;
-  } else {
     return false;
   }
+
+  logEntry(path, stat);
+  return true;
 }
 
 function logEntry(path, stat) {
